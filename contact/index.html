@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Yingna Xu</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --void: #0e0b1a; --twilight: #2d2640; --dusk: #1e1a2e;
+    --mercury: #7c3aed; --mercury-light: #a78bfa;
+    --gold: #d97706; --dawn: #f0ece8; --mid: #888;
+  }
+  html { background: var(--void); color: var(--dawn);
+    font-family: 'Courier New', Courier, monospace; }
+  body { min-height: 100vh; display: grid;
+    grid-template-rows: auto 1fr auto;
+    max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+
+  nav { display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 0; border-bottom: 0.5px solid var(--twilight); margin-bottom: 0; }
+  .nav-home { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none; transition: color 0.2s; }
+  .nav-home:hover { color: var(--dawn); }
+  .nav-title { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; padding: 80px 0; align-items: start; }
+
+  .contact-left h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 400;
+    color: var(--dawn); line-height: 1.2; margin-bottom: 24px; }
+  .contact-left p { font-size: 12px; color: var(--mid); line-height: 1.9;
+    margin-bottom: 32px; max-width: 320px; }
+
+  .contact-meta { display: flex; flex-direction: column; gap: 12px; }
+  .contact-meta-item { font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--twilight); }
+  .contact-meta-item a { color: var(--mercury-light); text-decoration: none;
+    border-bottom: 0.5px solid transparent; transition: border-color 0.2s, color 0.2s; }
+  .contact-meta-item a:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* form */
+  .contact-form { display: flex; flex-direction: column; gap: 0; }
+
+  .field { display: flex; flex-direction: column; border-top: 0.5px solid var(--twilight); }
+  .field:last-of-type { border-bottom: 0.5px solid var(--twilight); }
+
+  .field label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--mid); padding: 14px 0 8px; }
+
+  .field input, .field textarea {
+    background: transparent; border: none; outline: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px; color: var(--dawn);
+    padding: 0 0 14px; width: 100%; resize: none;
+    caret-color: var(--mercury-light);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--twilight); }
+  .field textarea { min-height: 120px; line-height: 1.7; }
+
+  .form-footer { display: flex; justify-content: space-between;
+    align-items: center; padding-top: 24px; }
+
+  .form-note { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--twilight); }
+
+  .submit-btn { background: none; border: 0.5px solid var(--mercury);
+    color: var(--mercury-light); font-family: 'Courier New', Courier, monospace;
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 10px 20px; cursor: pointer; transition: background 0.2s, color 0.2s;
+    border-radius: 2px; }
+  .submit-btn:hover { background: var(--mercury); color: var(--dawn); }
+
+  /* success state */
+  .success-msg { display: none; font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mercury-light); padding-top: 16px; }
+
+  footer { padding: 24px 0 0; border-top: 0.5px solid var(--twilight); }
+  footer p { font-size: 10px; color: var(--twilight); letter-spacing: 0.06em; }
+  footer a { color: var(--mid); text-decoration: none; }
+  footer a:hover { color: var(--dawn); }
+
+  @media (max-width: 640px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; padding: 48px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-home">← Yingna Xu</a>
+  <span class="nav-title">Contact</span>
+</nav>
+
+<main class="contact-grid">
+
+  <div class="contact-left">
+    <h1>Get in<br>touch.</h1>
+    <p>For Labyrinth support, collaboration, or just to say hello. I read everything and reply to most things.</p>
+    <div class="contact-meta">
+      <div class="contact-meta-item">App support<br>
+        <a href="https://github.com/bookoomoi/Labyrinth/discussions" target="_blank" rel="noopener">GitHub Discussions ↗</a>
+      </div>
+      <div class="contact-meta-item">Everything else<br>
+        <a href="#contactForm">Fill in the form →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <!-- Replace YOUR_FORM_ID with your Formspree endpoint after signing up at formspree.io -->
+    <form class="contact-form" action="https://formspree.io/f/mgobrklp" method="POST"
+      id="contactForm">
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="field">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="What's this about?">
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+      </div>
+
+      <div class="form-footer">
+        <span class="form-note">Sent via Formspree · private</span>
+        <button type="submit" class="submit-btn">Send ↗</button>
+      </div>
+
+      <p class="success-msg" id="successMsg">✦ Message sent. Thank you.</p>
+    </form>
+  </div>
+
+</main>
+
+<footer>
+  <p><a href="/">Yingna Xu</a> · <a href="/labyrinth">Labyrinth</a> · <a href="/privacy">Privacy</a></p>
+</footer>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('successMsg');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const res = await fetch(form.action, {
+      method: 'POST', body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.reset();
+      success.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>

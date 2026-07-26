@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility — Labyrinth</title>
+<meta name="description" content="Accessibility statement for Labyrinth: Tasks &amp; Notes.">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --void: #0e0b1a; --twilight: #2d2640; --mercury-light: #a78bfa;
+    --gold: #d97706; --dawn: #f0ece8; --mid: #888;
+  }
+  html { background: var(--void); color: var(--dawn);
+    font-family: 'Courier New', Courier, monospace; }
+  body { max-width: 620px; margin: 0 auto; padding: 0 24px 120px; }
+
+  nav { display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 0; border-bottom: 0.5px solid var(--twilight); }
+  .nav-home { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none; transition: color 0.2s; }
+  .nav-home:hover { color: var(--dawn); }
+  .nav-title { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); }
+
+  h1 { font-size: 22px; font-weight: 400; color: var(--dawn); margin: 56px 0 8px; line-height: 1.3; }
+  .updated { font-size: 10px; color: var(--mid); letter-spacing: 0.1em; margin-bottom: 48px; }
+  h2 { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--mercury-light); margin: 40px 0 16px; }
+  p { font-size: 13px; color: var(--mid); line-height: 1.9; margin-bottom: 16px; }
+  p strong { color: var(--dawn); font-weight: 400; }
+
+  /* list: block flow with absolute marker — no flex, so text wraps as one paragraph */
+  ul { list-style: none; margin-bottom: 16px; }
+  li { font-size: 13px; color: var(--mid); line-height: 1.9;
+    position: relative; padding-left: 22px; margin-bottom: 10px; }
+  li::before { content: '✦'; color: var(--gold); font-size: 8px;
+    position: absolute; left: 0; top: 7px; }
+  li strong { color: var(--dawn); font-weight: 400; }
+
+  .highlight { border-left: 2px solid var(--gold); padding: 16px 20px;
+    margin: 32px 0; background: #110d00; border-radius: 0 4px 4px 0; }
+  .highlight p { margin: 0; color: var(--dawn); font-size: 13px; }
+
+  a { color: var(--mercury-light); text-decoration: none;
+    border-bottom: 0.5px solid var(--mercury-light); padding-bottom: 1px; transition: color 0.2s; }
+  a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  a:focus-visible, .nav-home:focus-visible {
+    outline: 2px solid var(--mercury-light); outline-offset: 3px; border-radius: 2px; }
+
+  footer { padding: 48px 0 0; border-top: 0.5px solid var(--twilight); margin-top: 64px; }
+  footer p { font-size: 10px; color: var(--twilight); }
+  footer a { color: var(--mid); border-bottom: none; }
+  footer a:hover { color: var(--dawn); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/labyrinth" class="nav-home">← Labyrinth</a>
+  <span class="nav-title">Accessibility</span>
+</nav>
+
+<main>
+<h1>Accessibility</h1>
+<p class="updated">Last updated: July 2026</p>
+
+<div class="highlight">
+  <p>One path, no dead ends. That is the idea behind the name, and it applies to who can use this too.</p>
+</div>
+
+<h2>Where this stands</h2>
+<p>Labyrinth is done solo. Accessibility is part of the build, not something bolted on later, but it is unfinished. This page says what has actually been checked and what has not. It gets updated as that changes.</p>
+
+<h2>Confirmed</h2>
+<ul>
+  <li><strong>Plain text data.</strong> Notes are stored as standard .md files, so they can be opened in whichever editor works for you, including one built for your own setup.</li>
+</ul>
+
+<h2>Being tested</h2>
+<p>These are in the build and under audit now. None are claimed as supported until each has been walked end to end on a real device.</p>
+<ul>
+  <li>VoiceOver on iPhone and Mac</li>
+  <li>Voice Control on iPhone and Mac</li>
+  <li>Reduce Motion</li>
+  <li>Keyboard navigation on Mac</li>
+</ul>
+
+<h2>Known limitations</h2>
+<ul>
+  <li>Text does not yet scale fully with Dynamic Type. Some sizes are fixed and will not respond to your system text size setting.</li>
+  <li>Some controls have tap targets smaller than the 44pt minimum.</li>
+  <li>Some secondary text sits below the contrast ratio it should meet.</li>
+  <li>Moving a task between board columns relies on drag, which is harder without a pointer or touch. Other ways in are being added.</li>
+  <li>Tag chips carry colour, but the tag name is always shown alongside, so colour is never the only signal.</li>
+</ul>
+
+<h2>This website</h2>
+<p>Semantic HTML, visible keyboard focus, no motion-dependent content. Every page works without JavaScript except the contact form.</p>
+
+<h2>Feedback</h2>
+<p>Shake your device inside the app to send a report, open an issue on <a href="https://github.com/bookoomoi/Labyrinth/discussions" target="_blank" rel="noopener">GitHub Discussions ↗</a>, or <a href="/contact">get in touch</a> directly.</p>
+<p>If something in Labyrinth or on this site is difficult or impossible to use, please do tell.</p>
+
+<h2>Standards</h2>
+<p>Labyrinth works towards <strong>WCAG 2.1 Level AA</strong> and follows Apple's Human Interface Guidelines for accessibility. This is a self-assessment, not an independent audit.</p>
+</main>
+
+<footer>
+  <p>Labyrinth · bookoomoi · <a href="/labyrinth">Labyrinth</a> · <a href="/privacy">Privacy</a> · <a href="/">Home</a></p>
+</footer>
+
+</body>
+</html>

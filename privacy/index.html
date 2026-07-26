@@ -35,6 +35,8 @@
   a { color: var(--mercury-light); text-decoration: none;
     border-bottom: 0.5px solid var(--mercury-light); padding-bottom: 1px; transition: color 0.2s; }
   a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  a:focus-visible, .nav-home:focus-visible {
+    outline: 2px solid var(--mercury-light); outline-offset: 3px; border-radius: 2px; }
 
   footer { padding: 48px 0 0; border-top: 0.5px solid var(--twilight); margin-top: 64px; }
   footer p { font-size: 10px; color: var(--twilight); }
@@ -49,42 +51,44 @@
   <span class="nav-title">Privacy Policy</span>
 </nav>
 
+<main>
 <h1>Privacy Policy</h1>
-<p class="updated">Last updated: June 2026</p>
+<p class="updated">Last updated: July 2026</p>
 
 <div class="highlight">
-  <p>Labyrinth collects no personal data. Everything stays on your device. Most apps need two screens of SDKs to tell you what they track. Labyrinth needs none.</p>
+  <p>Labyrinth has no server. Your tasks and notes sit in a folder you chose, on a device you own.</p>
 </div>
 
-<h2>What Labyrinth collects</h2>
-<p><strong>Nothing.</strong> Labyrinth does not collect, store, or transmit any personal data to any server. Tasks, notes, and calendar data never leave your device unless you choose to move them.</p>
+<h2>What is collected</h2>
+<p><strong>Nothing.</strong> Labyrinth has no account system, no user profile, and no backend. Your tasks, notes, and calendar data stay on your device unless you move them yourself.</p>
 
-<h2>Data storage</h2>
-<p>Task data is stored locally using CoreData. Notes are stored as plain <strong>.md files</strong> in a folder you choose, readable in any text editor or file manager outside the app.</p>
+<h2>Where your data lives</h2>
+<p>Tasks are stored locally using CoreData. Notes are saved as plain <strong>.md files</strong> in a folder you choose. Both can be opened outside the app in any text editor or file manager.</p>
 
 <h2>Calendar access</h2>
-<p>Labyrinth requests read-only access to Apple Calendar to display events alongside tasks. Calendar data is never transmitted anywhere.</p>
+<p>Labyrinth asks for access to your calendar so it can show events alongside your tasks. Access is read-only. Nothing is copied off your device.</p>
+
+<h2>Problem reports</h2>
+<p>If you shake your device to report a problem, Labyrinth sends what you write, plus a screenshot of the current screen, to a private issue tracker so the problem can be fixed. This only happens when you choose to send a report. You can see the screenshot before it goes. If the screen shows something you would rather keep private, cancel and report it another way.</p>
 
 <h2>Analytics and tracking</h2>
-<p><strong>None.</strong> No analytics SDKs. No advertising identifiers. No crash reporting tied to your identity. No third-party tracking of any kind.</p>
+<p><strong>None.</strong> No analytics tools, no advertising identifiers, no third-party tracking.</p>
 
 <h2>Crash reports</h2>
-<p>If you have opted into sharing diagnostics with Apple through iOS Settings, Apple may collect anonymous crash logs visible to developers through Xcode Organizer. This is controlled by your device settings, not by Labyrinth. No identity is ever visible.</p>
-
-<h2>In-app purchases</h2>
-<p>Pro subscription payments are processed entirely by Apple. Labyrinth never sees or stores payment information.</p>
+<p>If you share diagnostics with Apple in your device settings, Apple may pass anonymous crash logs to developers through Xcode. That is controlled by your settings, not by Labyrinth, and your identity is never included.</p>
 
 <h2>Children</h2>
-<p>Labyrinth is rated 4+ and collects no data from any user regardless of age.</p>
+<p>Labyrinth is rated 4+ and safe for all ages. No data is collected from any user, at any age.</p>
 
-<h2>Changes</h2>
-<p>If this policy changes, the date at the top of this page updates. Data collection will never be introduced without stating it here first.</p>
+<h2>Changes to this policy</h2>
+<p>If this policy changes, the date at the top of the page changes with it. Nothing will start being collected without being written here first.</p>
 
 <h2>Contact</h2>
 <p>Questions about privacy? <a href="/contact">Get in touch</a></p>
+</main>
 
 <footer>
-  <p>Labyrinth · bookoomoi · <a href="/labyrinth">Labyrinth page</a> · <a href="/">yingnaxu.com</a></p>
+  <p>Labyrinth · bookoomoi · <a href="/labyrinth">Labyrinth</a> · <a href="/accessibility">Accessibility</a> · <a href="/">Home</a></p>
 </footer>
 
 </body>

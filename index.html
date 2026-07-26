@@ -10,52 +10,37 @@
     --void: #0e0b1a; --dawn: #f0ece8; --mercury: #7c3aed;
     --mercury-light: #a78bfa; --gold: #d97706; --mid: #888; --twilight: #2d2640;
   }
-  html, body { width: 100%; height: 100%; background: var(--dawn); color: var(--void);
-    font-family: 'Courier New', Courier, monospace; overflow: hidden; cursor: crosshair; }
+  html, body { width: 100%; height: 100%; background: var(--void); color: var(--dawn);
+    font-family: 'Courier New', Courier, monospace; overflow: hidden; }
 
   .name { position: fixed; top: 28px; left: 50%; transform: translateX(-50%);
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--void);
-    z-index: 10; white-space: nowrap; mix-blend-mode: multiply; }
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dawn);
+    z-index: 10; white-space: nowrap; }
 
-  .image-layer { position: fixed; inset: 0; z-index: 1; opacity: 0;
-    transition: opacity 0.6s ease; background: var(--void);
+  .image-layer { position: fixed; inset: 0; z-index: 1;
     display: flex; align-items: center; justify-content: center; }
-  body:hover .image-layer { opacity: 1; }
 
   .spiral { width: min(340px, 70vw); height: min(340px, 70vw); opacity: 0.9; }
 
   .construction { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-    z-index: 20; text-align: center; opacity: 0; transition: opacity 0.4s ease 0.2s;
-    white-space: nowrap; }
-  body:hover .construction { opacity: 1; }
+    z-index: 20; text-align: center; white-space: nowrap; }
 
   .construction-line { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--dawn); display: block; line-height: 2; }
+    color: var(--mid); display: block; line-height: 2; }
   .construction-line a { color: var(--mercury-light); text-decoration: none;
     border-bottom: 0.5px solid var(--mercury-light); padding-bottom: 1px; transition: color 0.2s; }
   .construction-line a:hover { color: var(--gold); border-bottom-color: var(--gold); }
-
-  .hint { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid);
-    z-index: 5; opacity: 1; transition: opacity 0.3s ease; white-space: nowrap; }
-  body:hover .hint { opacity: 0; }
 
   .nav-left { position: fixed; top: 28px; left: 32px; z-index: 20;
     font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; }
   .nav-right { position: fixed; top: 28px; right: 32px; z-index: 20;
     font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; }
   .nav-left a, .nav-right a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
-  .nav-left a:hover, .nav-right a:hover { color: var(--mercury); }
-  body:hover .nav-left a, body:hover .nav-right a { color: var(--dawn); opacity: 0.5; }
-  body:hover .nav-left a:hover, body:hover .nav-right a:hover { color: var(--mercury-light); opacity: 1; }
+  .nav-left a:hover, .nav-right a:hover { color: var(--mercury-light); }
 
-  @media (hover: none) {
-    .image-layer { opacity: 1; } .construction { opacity: 1; } .hint { opacity: 0; }
-    .nav-left a, .nav-right a { color: var(--dawn); opacity: 0.5; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .image-layer, .construction, .hint { transition: none; }
-  }
+  a:focus-visible { outline: 2px solid var(--mercury-light); outline-offset: 4px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -66,7 +51,7 @@
 <nav class="nav-right"><a href="/contact">Contact</a></nav>
 
 <div class="image-layer">
-  <svg class="spiral" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <svg class="spiral" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Golden spiral mark">
     <path d="M200,200 C200,200 200,120 120,120 C40,120 40,200 40,200 C40,280 120,280 200,280
       C280,280 310,200 310,120 C310,40 240,10 170,10 C100,10 30,60 30,140
       C30,220 30,310 30,380"
@@ -79,8 +64,6 @@
     <circle cx="196" cy="200" r="2" fill="#d97706"/>
   </svg>
 </div>
-
-<div class="hint">hover</div>
 
 <div class="construction">
   <span class="construction-line">* under construction *</span>

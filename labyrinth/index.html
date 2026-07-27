@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Labyrinth — Tasks &amp; Notes</title>
-<meta name="description" content="Local-first productivity. Tasks, notes, and calendar, all on your device. No account. No cloud.">
-<meta property="og:title" content="Labyrinth: Tasks &amp; Notes">
+<title>Labyrinth — Tasks & Notes</title>
+<meta name="description" content="Local-first productivity. Tasks, notes, and calendar — all on your device. No account. No cloud.">
+<meta property="og:title" content="Labyrinth: Tasks & Notes">
 <meta property="og:description" content="Local-first productivity. Your data stays on your device.">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,9 +39,6 @@
     text-transform: uppercase; text-decoration: none; padding: 12px 24px;
     border-radius: 2px; transition: background 0.2s; }
   .cta-primary:hover { background: var(--mercury-light); color: var(--void); }
-  .cta-pending { display: inline-block; border: 0.5px solid var(--mercury);
-    color: var(--mercury-light); font-size: 11px; letter-spacing: 0.12em;
-    text-transform: uppercase; padding: 12px 24px; border-radius: 2px; }
   .cta-secondary { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--mid); text-decoration: none; border-bottom: 0.5px solid var(--twilight);
     padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
@@ -57,34 +54,33 @@
     color: var(--mercury-light); padding-top: 2px; }
   .feature-text { font-size: 13px; color: var(--mid); line-height: 1.7; }
   .feature-text strong { color: var(--dawn); font-weight: 400; }
-  .feature-note { display: block; font-size: 11px; color: var(--twilight); margin-top: 6px; }
 
-  /* screenshots — horizontal swipe gallery */
+  /* ── Screenshots — petite gallery + lightbox ───────────────────────── */
   .screenshots { padding: 64px 0; border-bottom: 0.5px solid var(--twilight); }
-  .gallery { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin; scrollbar-color: var(--twilight) transparent;
-    margin: 0 -24px; padding: 0 24px 20px; }
-  .gallery::-webkit-scrollbar { height: 3px; }
-  .gallery::-webkit-scrollbar-track { background: transparent; }
-  .gallery::-webkit-scrollbar-thumb { background: var(--twilight); border-radius: 2px; }
-  .shot { flex: 0 0 auto; width: 210px; scroll-snap-align: center; }
-  .shot img { width: 100%; aspect-ratio: 1242 / 2688; object-fit: cover;
-    border-radius: 8px; display: block; background: var(--obsidian); }
-  .shot figcaption { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--twilight); margin-top: 12px; text-align: center; }
-  .shot figcaption b { color: var(--mercury-light); font-weight: 400; }
-  .swipe-hint { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--twilight); margin-top: 4px; }
+  .shot-gallery { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;
+    margin-top: 40px; }
+  .shot { width: 160px; cursor: zoom-in; opacity: 0.92;
+    transition: transform 0.3s ease, opacity 0.3s ease; }
+  .shot:hover { transform: translateY(-6px); opacity: 1; }
+  .shot img { width: 100%; height: auto; display: block; border-radius: 16px;
+    border: 0.5px solid var(--twilight); }
+  .shot-caption { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--mid); text-align: center; margin-top: 12px; }
+
+  .lightbox { position: fixed; inset: 0; background: rgba(14, 11, 26, 0.94);
+    display: none; align-items: center; justify-content: center; z-index: 1000;
+    cursor: zoom-out; padding: 40px; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 22px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
 
   .privacy-block { padding: 64px 0; border-bottom: 0.5px solid var(--twilight); }
   .privacy-headline { font-size: 18px; color: var(--dawn); line-height: 1.4;
     margin-bottom: 24px; font-weight: 400; }
   .privacy-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
   .privacy-list li { font-size: 11px; color: var(--mid); letter-spacing: 0.05em;
-    position: relative; padding-left: 20px; line-height: 1.7; }
-  .privacy-list li::before { content: '✦'; color: var(--gold); font-size: 8px;
-    position: absolute; left: 0; top: 3px; }
+    display: flex; gap: 12px; align-items: baseline; }
+  .privacy-list li::before { content: '✦'; color: var(--gold); flex-shrink: 0; font-size: 8px; }
 
   footer { padding: 48px 0 0; display: flex; justify-content: space-between;
     align-items: flex-end; flex-wrap: wrap; gap: 16px; }
@@ -93,15 +89,13 @@
   .footer-left a:hover { color: var(--dawn); }
   .footer-spiral { width: 32px; height: 32px; opacity: 0.3; }
 
-  a:focus-visible, .gallery:focus-visible {
-    outline: 2px solid var(--mercury-light); outline-offset: 3px; border-radius: 2px; }
-
   @media (max-width: 480px) {
     .feature-item { grid-template-columns: 1fr; gap: 8px; }
     .cta-group { flex-direction: column; align-items: flex-start; }
-    .shot { width: 180px; }
+    .shot { width: 132px; }
+    .shot-gallery { gap: 20px; }
   }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -112,67 +106,22 @@
 </nav>
 
 <section class="hero">
-  <svg class="hero-icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Labyrinth app icon">
+  <svg class="hero-icon" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
     <rect width="120" height="120" rx="26" fill="#0e0b1a"/>
     <path d="M60,60 C60,60 60,38 38,38 C16,38 16,60 16,60 C16,82 38,82 60,82 C82,82 90,60 90,38 C90,16 70,4 50,4 C30,4 10,20 10,42 C10,64 10,88 10,108"
       fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
     <circle cx="52" cy="60" r="4" fill="#a78bfa"/>
   </svg>
 
-  <div class="hero-name">Labyrinth: Tasks &amp; Notes</div>
-  <h1 class="hero-headline">Your tasks.<br>Your device.<br>Always.</h1>
-  <p class="hero-sub">Tasks, notes, and calendar, all stored on your device. Works offline, on any connection, anywhere.</p>
+  <div class="hero-name">Labyrinth: Tasks & Notes</div>
+  <h1 class="hero-headline">Your data.<br>Your device.<br>Your rules.</h1>
+  <p class="hero-sub">Tasks, notes, and calendar, all local. No account. No cloud. Works offline, behind any firewall, in any country.</p>
 
   <div class="cta-group">
-    <!-- SWAP ON LAUNCH: replace the span below with
-         <a href="APP_STORE_URL" class="cta-primary">Download on App Store ↗</a> -->
-    <span class="cta-pending">Coming to the App Store</span>
-    <a href="/privacy" class="cta-secondary">Privacy</a>
+    <a href="#" class="cta-primary">Download on App Store ↗</a>
+    <a href="/privacy" class="cta-secondary">Privacy policy</a>
     <a href="/accessibility" class="cta-secondary">Accessibility</a>
   </div>
-</section>
-
-<section class="screenshots">
-  <div class="section-label">Screenshots</div>
-  <div class="gallery" tabindex="0" role="region" aria-label="App screenshots, scroll horizontally">
-
-    <figure class="shot">
-      <img src="screenshots/01-tasks.png" alt="Task list grouped by day with coloured tags and status markers">
-      <figcaption><b>1</b> · List</figcaption>
-    </figure>
-
-    <figure class="shot">
-      <img src="screenshots/02-board.png" alt="Kanban board with To Do, In Progress and Done columns">
-      <figcaption><b>2</b> · Board</figcaption>
-    </figure>
-
-    <figure class="shot">
-      <img src="screenshots/03-calendar.png" alt="Month calendar with task dots and an agenda sheet below">
-      <figcaption><b>3</b> · Calendar</figcaption>
-    </figure>
-
-    <figure class="shot">
-      <img src="screenshots/04-notes.png" alt="A note open as a plain markdown file named by date">
-      <figcaption><b>4</b> · Notes</figcaption>
-    </figure>
-
-    <figure class="shot">
-      <img src="screenshots/05-task.png" alt="Task detail with status, due date, reminder, priority and tags">
-      <figcaption><b>5</b> · Detail</figcaption>
-    </figure>
-
-    <figure class="shot">
-      <img src="screenshots/06-privacy.png" alt="iOS permissions screen showing no data collected">
-      <figcaption><b>6</b> · Privacy</figcaption>
-    </figure>
-
-    <figure class="shot">
-      <img src="screenshots/07-tags.png" alt="Task list being filtered by a single tag">
-      <figcaption><b>7</b> · Tags</figcaption>
-    </figure>
-
-  </div>
-  <p class="swipe-hint">swipe →</p>
 </section>
 
 <section class="features">
@@ -180,7 +129,7 @@
   <ul class="feature-list">
     <li class="feature-item">
       <span class="feature-label">Tasks</span>
-      <span class="feature-text"><strong>List, board, and calendar views.</strong> Filter by status or tag. Tasks with due dates sit next to your calendar events.</span>
+      <span class="feature-text"><strong>List, board, and calendar views.</strong> Filter by status or tag. Tasks with due dates sit alongside your calendar events, no context switching.</span>
     </li>
     <li class="feature-item">
       <span class="feature-label">Board</span>
@@ -188,44 +137,105 @@
     </li>
     <li class="feature-item">
       <span class="feature-label">Calendar</span>
-      <span class="feature-text"><strong>Reads any calendar already synced to your device.</strong> Apple, Google, Outlook. Tap a day for tasks and events together.</span>
+      <span class="feature-text"><strong>Connects to Apple Calendar, Google, Outlook.</strong> Any account synced to your iPhone. Tap a day to see tasks and events together.</span>
     </li>
     <li class="feature-item">
       <span class="feature-label">Notes vault</span>
-      <span class="feature-text"><strong>Every task links to a .md file</strong> in a folder you pick. Open it in Obsidian, iA Writer, or anything that reads text.</span>
+      <span class="feature-text"><strong>Every task links to a .md file</strong> in a folder you choose. Open in Obsidian, iA Writer, or any text editor. No lock-in.</span>
     </li>
     <li class="feature-item">
       <span class="feature-label">Tags</span>
-      <span class="feature-text"><strong>Health · Personal · Learning · Social · Finance · Work.</strong> Add your own. Filter any view.</span>
+      <span class="feature-text"><strong>Health · Personal · Learning · Social · Finance · Work.</strong> Colour-coded, filterable, yours to customise.</span>
     </li>
     <li class="feature-item">
       <span class="feature-label">Platforms</span>
-      <span class="feature-text"><strong>iPhone and Mac.</strong> Runs on iOS 17 and macOS 14 or later; check the App Store for the current requirement. Widgets, Shortcuts, and Siri to come.</span>
+      <span class="feature-text"><strong>iPhone and Mac.</strong> One app, not two.</span>
     </li>
   </ul>
+</section>
+
+<section class="screenshots">
+  <div class="section-label">Screenshots</div>
+  <!-- Petite gallery · click any shot to enlarge.
+       TODO before push: put your flattened (no-alpha) PNGs in /img/ and fix each src.
+       Captions double as keyword surfaces — keep them descriptive. -->
+  <div class="shot-gallery">
+    <div class="shot" onclick="openLightbox(this)">
+      <img src="/img/v1-ios-screen-1.png" alt="Local-first to-do list — tasks on your device">
+      <div class="shot-caption">01 · List</div>
+    </div>
+    <div class="shot" onclick="openLightbox(this)">
+      <img src="/img/v1-ios-screen-2.png" alt="Kanban board — To Do, In Progress, Done">
+      <div class="shot-caption">02 · Board</div>
+    </div>
+    <div class="shot" onclick="openLightbox(this)">
+      <img src="/img/v1-ios-screen-3.png" alt="Calendar view — tasks and events together">
+      <div class="shot-caption">03 · Calendar</div>
+    </div>
+    <div class="shot" onclick="openLightbox(this)">
+      <img src="/img/v1-ios-screen-4.png" alt="Markdown notes vault — plain .md files">
+      <div class="shot-caption">04 · Notes</div>
+    </div>
+    <div class="shot" onclick="openLightbox(this)">
+      <img src="/img/v1-ios-screen-5.png" alt="Colour-coded tags across life domains">
+      <div class="shot-caption">05 · Tags</div>
+    </div>
+    <div class="shot" onclick="openLightbox(this)">
+      <img src="/img/v1-ios-screen-6.png" alt="No data collected — private and local-first">
+      <div class="shot-caption">06 · Privacy</div>
+    </div>
+    <div class="shot" onclick="openLightbox(this)">
+      <img src="/img/v1-ios-screen-7.png" alt="Task detail — status, due date, notes and tags">
+      <div class="shot-caption">07 · Task</div>
+    </div>
+  </div>
 </section>
 
 <section class="privacy-block">
   <h2 class="privacy-headline">No data collected.<br>No cloud required.</h2>
   <ul class="privacy-list">
-    <li>Everything stays on your device</li>
-    <li>Plain .md files, open and readable across text editors</li>
-    <li>No account required, analytics, or advertising identifiers</li>
+    <li>Everything stays on your device. Always.</li>
+    <li>Works offline, behind any firewall, in any country.</li>
+    <li>Plain .md files, open in any text editor, readable forever.</li>
+    <li>No account required. No analytics. No advertising identifiers.</li>
   </ul>
 </section>
 
 <footer>
   <div class="footer-left">
-    Labyrinth · Free to download<br>
-    <a href="/privacy">Privacy</a> · <a href="/accessibility">Accessibility</a> · <a href="/contact">Support</a><br>
+    Labyrinth · Free to download · Pro unlocks unlimited tasks, notes vault, macOS<br>
+    <a href="/privacy">Privacy policy</a> · <a href="/accessibility">Accessibility</a> · <a href="/contact">Support</a> · <a href="/">yingnaxu.com</a><br>
     © 2026 bookoomoi
   </div>
-  <svg class="footer-spiral" viewBox="0 0 120 120" role="presentation">
+  <svg class="footer-spiral" viewBox="0 0 120 120">
     <path d="M60,60 C60,60 60,38 38,38 C16,38 16,60 16,60 C16,82 38,82 60,82 C82,82 90,60 90,38 C90,16 70,4 50,4 C30,4 10,20 10,42 C10,64 10,88 10,108"
       fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
     <circle cx="52" cy="60" r="4" fill="#a78bfa"/>
   </svg>
 </footer>
+
+<!-- Lightbox — click anywhere or press Esc to close -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="Enlarged screenshot">
+</div>
+
+<script>
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    const box = document.getElementById('lightbox-img');
+    box.src = img.src;
+    box.alt = img.alt;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
 
 </body>
 </html>

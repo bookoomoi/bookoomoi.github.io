@@ -55,17 +55,39 @@
   .feature-text { font-size: 13px; color: var(--mid); line-height: 1.7; }
   .feature-text strong { color: var(--dawn); font-weight: 400; }
 
-  /* ── Screenshots — petite gallery + lightbox ───────────────────────── */
+  /* ── Screenshots — App Store style horizontal swipe strip + lightbox ── */
   .screenshots { padding: 64px 0; border-bottom: 0.5px solid var(--twilight); }
-  .shot-gallery { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;
-    margin-top: 40px; }
-  .shot { width: 160px; cursor: zoom-in; opacity: 0.92;
-    transition: transform 0.3s ease, opacity 0.3s ease; }
+  .shot-strip {
+    display: flex;
+    gap: 20px;
+    margin-top: 36px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--twilight) transparent;
+    /* let the strip bleed to the page edges so it reads as a scroller */
+    margin-left: -24px; margin-right: -24px;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .shot-strip::-webkit-scrollbar { height: 5px; }
+  .shot-strip::-webkit-scrollbar-track { background: transparent; }
+  .shot-strip::-webkit-scrollbar-thumb { background: var(--twilight); border-radius: 3px; }
+  .shot {
+    flex: 0 0 auto;
+    width: 130px;                 /* petite */
+    scroll-snap-align: start;
+    cursor: zoom-in; opacity: 0.9;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
   .shot:hover { transform: translateY(-6px); opacity: 1; }
-  .shot img { width: 100%; height: auto; display: block; border-radius: 16px;
+  .shot img { width: 100%; height: auto; display: block; border-radius: 14px;
     border: 0.5px solid var(--twilight); }
   .shot-caption { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--mid); text-align: center; margin-top: 12px; }
+  .scroll-hint { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--twilight); margin-top: 4px; }
 
   .lightbox { position: fixed; inset: 0; background: rgba(14, 11, 26, 0.94);
     display: none; align-items: center; justify-content: center; z-index: 1000;
@@ -92,8 +114,7 @@
   @media (max-width: 480px) {
     .feature-item { grid-template-columns: 1fr; gap: 8px; }
     .cta-group { flex-direction: column; align-items: flex-start; }
-    .shot { width: 132px; }
-    .shot-gallery { gap: 20px; }
+    .shot { width: 116px; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -156,10 +177,9 @@
 
 <section class="screenshots">
   <div class="section-label">Screenshots</div>
-  <!-- Petite gallery · click any shot to enlarge.
-       TODO before push: put your flattened (no-alpha) PNGs in /img/ and fix each src.
-       Captions double as keyword surfaces — keep them descriptive. -->
-  <div class="shot-gallery">
+  <!-- App Store style swipe strip · petite 130px · click any shot to enlarge.
+       Images live in /img/ as v1-ios-screen-1..7.png (flattened, no alpha). -->
+  <div class="shot-strip">
     <div class="shot" onclick="openLightbox(this)">
       <img src="/img/v1-ios-screen-1.png" alt="Local-first to-do list — tasks on your device">
       <div class="shot-caption">01 · List</div>
@@ -189,6 +209,7 @@
       <div class="shot-caption">07 · Task</div>
     </div>
   </div>
+  <div class="scroll-hint">← swipe to explore →</div>
 </section>
 
 <section class="privacy-block">
